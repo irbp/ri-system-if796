@@ -17,7 +17,7 @@ public class App {
     private static Scanner input = new Scanner(System.in);
     private static int menu;
 
-    public static void printMenu() {
+    private static void printMenu() {
         System.out.println("*********IR SYSTEM*********");
         System.out.println("1 - Create a new base");
         System.out.println("2 - Make a new query");
@@ -26,7 +26,7 @@ public class App {
         System.out.print("Choose an option: ");
     }
 
-    public static void createBase() throws IOException {
+    private static void createBase() throws IOException {
         String option;
         String path;
         Indexer indexer;
@@ -38,10 +38,10 @@ public class App {
 
         System.out.print("Stopwords? (y / n): ");
         option = input.nextLine();
-        stopword = option.equalsIgnoreCase("y") ? true : false;
+        stopword = option.equalsIgnoreCase("y");
         System.out.print("Stemming? (y / n): ");
         option = input.nextLine();
-        stemming = option.equalsIgnoreCase("y") ? true : false;
+        stemming = option.equalsIgnoreCase("y");
         indexer.setAnalyzer(stopword, stemming);
 
         Analyzer analyzer = indexer.getAnalyzer();
