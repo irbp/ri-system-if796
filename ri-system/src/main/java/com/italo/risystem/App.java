@@ -5,10 +5,6 @@ import java.util.Scanner;
 
 import org.apache.lucene.analysis.Analyzer;
 
-/**
- * Hello world!
- *
- */
 public class App {
 
     private static final int CREATE_BASE = 1;
@@ -55,6 +51,28 @@ public class App {
         indexer.closeWriter();
     }
 
+    private static void searchIndex() throws IOException {
+        String option;
+        String path;
+        String queryString;
+        boolean stopword, stemming;
+
+        System.out.print("Enter the index path: ");
+        path = input.nextLine();
+        System.out.print("Stopwords? (y / n): ");
+        option = input.nextLine();
+        stopword = option.equalsIgnoreCase("y");
+        System.out.print("Stemming? (y / n): ");
+        option = input.nextLine();
+        stemming = option.equalsIgnoreCase("y");
+        System.out.print("Enter your query: ");
+        queryString = input.nextLine();
+
+        Searcher searcher = new Searcher(path, stopword, stemming);
+        Analyzer analyzer = searcher.getAnalyser();
+        searcher.search(queryString, analyzer);
+    }
+
     public static void main(String[] args) throws IOException {
         String option;
 
@@ -70,7 +88,7 @@ public class App {
                     break;
                 }
                 case MAKE_QUERY: {
-                    System.out.println("Making a query...");
+                    searchIndex();
                     break;
                 }
                 default: {
