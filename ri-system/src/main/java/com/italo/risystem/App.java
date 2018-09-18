@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.queryparser.classic.ParseException;
 
 public class App {
 
@@ -51,7 +52,7 @@ public class App {
         indexer.closeWriter();
     }
 
-    private static void searchIndex() throws IOException {
+    private static void searchIndex() throws IOException, ParseException {
         String option;
         String path;
         String queryString;
@@ -73,7 +74,7 @@ public class App {
         searcher.search(queryString, analyzer);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
         String option;
 
         System.out.println("Hello World!");

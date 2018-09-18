@@ -7,13 +7,14 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.apache.lucene.util.QueryBuilder;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -57,9 +58,10 @@ public class Searcher {
         return analyzer;
     }
 
-    public void search(String queryString, Analyzer analyzer) throws IOException {
-        QueryBuilder builder = new QueryBuilder(analyzer);
-        Query query = builder.createPhraseQuery("content", queryString);
+    public void search(String queryString, Analyzer analyzer) throws ParseException, IOException {
+        QueryParser queryParser = new QueryParser("content", analyzer);
+        Query query = queryParser.parse(queryString);
+
         TopDocs topDocs = indexSearcher.search(query, MAX_HITS);
         ScoreDoc[] hits = topDocs.scoreDocs;
 

@@ -1,0 +1,2 @@
+(propostas OR melhorias) AND (saúde OR educação OR segurança)
+(contratação OR negociação) AND (reforço OR jogador OR atleta)
